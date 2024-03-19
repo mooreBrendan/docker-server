@@ -1,0 +1,108 @@
+version: "3"
+services:
+  #home assistant
+  homeassistant:
+    container_name: homeassistant
+    image: "homeassistant/home-assistant:stable"
+    ports:
+      - "8123:8123/tcp"
+    volumes:
+      - ~/Homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    #network_mode: host
+  
+  #pihole
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: host
+    ports:
+      - target: 53
+        published: 53
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 53
+        protocol: udp
+        mode: host
+      - "67:67/udp"
+      - "8070:80/tcp"
+      - "8073:443/tcp"
+    environment:
+      TZ: 'America/Indianapolis'
+      WEBPASSWORD:
+      #'TEMP_PASSWORD' #'set a secure password here or it will be random'
+      WEBPASSWORD_FILE: '/etc/pihole/adminpw.txt'
+    # Volumes store your data between container upgrades
+    volumes:
+      - '~/pihole/etc-pihole:/etc/pihole'
+      - '~/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'    
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)      
+    #network_mode: host
+    restart: unless-stopped
+
+  #UPTIME KUMA
+  uptime_kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    volumes:
+     - uptime-kuma:/app/data
+    ports:
+     - 8060:3001
+    restart: always
+  
+
+  #Watch Tower
+  watch_tower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+
+  #Portainer
+  portainer:
+    image: portainer/portainer-ce:latest
+    hostname: portainer
+    container_name: portainer
+    volumes: 
+     - /var/run/docker.sock:/var/run/docker.sock
+     - portainer_data:/data
+    ports:
+     - 8000:8000
+     - 9443:9443
+
+  dashy:
+    # To build from source, replace 'image: lissy93/dashy' with 'build: .'
+    # build: .    
+    image: lissy93/dashy
+    container_name: dashy
+    # Pass in your config file below, by specifying the path on your host machine    
+    volumes:
+      - /home/moore/dashy/config.yml:/app/public/conf.yml
+    ports:
+      - 80:80
+      - 443:443
+    # Set any environmental variables
+    environment:
+      - NODE_ENV=production
+      # Specify your user ID and group ID. You can find this by running `id -u` and `id -g`    
+      - UID=1000
+      - GID=1000
+    # Specify restart policy
+    restart: unless-stopped
+    # Configure healthchecks
+    healthcheck:
+      test: ['CMD', 'node', '/app/services/healthcheck']
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  uptime-kuma:
+  portainer_data:
