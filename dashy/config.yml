@@ -1,0 +1,237 @@
+appConfig:
+  theme: nord-frost
+  language: en
+  layout: auto
+  iconSize: large
+  startingView: default
+  defaultOpeningMethod: newtab
+  statusCheck: true
+  statusCheckInterval: 300
+  faviconApi: allesedv
+  routingMode: history
+  enableMultiTasking: false
+  widgetsAlwaysUseProxy: false
+  webSearch:
+    disableWebSearch: false
+    searchEngine: duckduckgo
+    openingMethod: newtab
+    searchBangs: {}
+  enableFontAwesome: true
+  enableMaterialDesignIcons: true
+  hideComponents:
+    hideHeading: false
+    hideNav: false
+    hideSearch: false
+    hideSettings: false
+    hideFooter: false
+  auth:
+    enableGuestAccess: false
+    users: []
+    enableKeycloak: false
+  showSplashScreen: false
+  preventWriteToDisk: false
+  preventLocalSave: false
+  disableConfiguration: false
+  disableConfigurationForNonAdmin: false
+  allowConfigEdit: true
+  enableServiceWorker: false
+  disableContextMenu: false
+  disableUpdateChecks: false
+  disableSmartSort: false
+  enableErrorReporting: false
+sections:
+  - name: Servers
+    items:
+      - title: VM01
+        icon: hl-vmware-esxi
+        url: https://vm01.bmoore.local
+        target: newtab
+        id: 0_746_vm
+      - title: VM02
+        icon: hl-vmware-esxi
+        url: https://vm02.bmoore.local
+        target: newtab
+        id: 1_746_vm
+      - title: NAS01
+        icon: hl-synology-dsm
+        url: https://nas01.bmoore.local:5001
+        target: newtab
+        id: 2_746_nas
+      - title: GCP
+        description: Google Cloud Platform
+        icon: hl-google-cloud-platform
+        url: https://console.cloud.google.com
+        target: newtab
+        id: 3_746_gcp
+      - title: Oracle
+        icon: hl-oracle-cloud
+        url: https://cloud.oracle.com/
+        target: newtab
+        id: 4_746_oracle
+      - title: Router
+        icon: si-verizon
+        url: https://192.168.86.1/
+        target: newtab
+        id: 5_746_router
+    displayData:
+      sortBy: alphabetical
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+      rows: 3
+  - name: Applications
+    displayData:
+      sortBy: default
+      rows: 2
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Pi-hole
+        icon: si-pihole
+        url: http://docker-black.bmoore.local:8070/admin/
+        target: newtab
+        id: 0_1255_pihole
+      - title: Uptime Kuma
+        icon: si-uptimekuma
+        url: http://docker-black.bmoore.local:8060/
+        target: newtab
+        id: 1_1255_uptimekuma
+      - title: freeIPA
+        icon: hl-freeipa
+        url: https://ipa.bmoore.local/ipa/ui/
+        target: newtab
+        id: 2_1255_freeipa
+      - title: Portainer
+        icon: si-portainer
+        url: https://docker-black.bmoore.local:9443/
+        id: 3_1255_portainer
+      - title: Home Assistant
+        icon: si-homeassistant
+        url: http://docker-black.bmoore.local:8123/
+        target: newtab
+        id: 4_1255_homeassistant
+      - title: Plex
+        icon: si-plex
+        url: http://plex.bmoore.local/web/index.html#!/
+        target: newtab
+        id: 5_1255_plex
+      - title: jellyfin
+        icon: si-jellyfin
+        url: http://rip.bmoore.local:8096/web/index.html#!/home.html
+        target: newtab
+        id: 6_1255_jellyfin
+      - title: OpenVPN
+        icon: si-openvpn
+        url: https://129.153.137.162/admin/
+        target: newtab
+        id: 7_1255_openvpn
+  - name: Coding
+    displayData:
+      sortBy: default
+      rows: 2
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: DockerHub
+        icon: hl-docker
+        url: https://hub.docker.com/
+        target: newtab
+        id: 0_596_dockerhub
+      - title: Notion
+        icon: si-notion
+        url: https://www.notion.so/bmoore-tech
+        target: newtab
+        id: 1_596_notion
+      - title: github
+        icon: si-github
+        url: https://github.com/mooreBrendan
+        target: newtab
+        id: 2_596_github
+      - title: Blogger
+        icon: si-blogger
+        url: https://www.blogger.com/
+        target: newtab
+        id: 3_596_blogger
+      - title: bmoore.tech
+        icon: 🌐
+        url: https://bmoore.tech/
+        target: newtab
+        id: 4_596_bmooretech
+      - title: Calendar
+        icon: hl-google-calendar
+        url: https://calendar.google.com/calendar/u/0/r/week?pli=1
+        target: newtab
+        id: 5_596_calendar
+      - title: draw.io
+        icon: hl-draw
+        url: https://app.diagrams.net/
+        target: newtab
+        id: 6_596_drawio
+  - name: Rip
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 3
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: firefox
+        icon: hl-firefox
+        url: http://rip.bmoore.local:3000
+        target: newtab
+        id: 0_299_firefox
+      - title: qbittorrent
+        icon: hl-qbittorrent
+        url: http://rip.bmoore.local:7040/
+        target: newtab
+        id: 1_299_qbittorrent
+      - title: prowlarr
+        description: tracker obtainer
+        icon: hl-prowlarr
+        url: http://rip.bmoore.local:9696/
+        target: newtab
+        id: 2_299_prowlarr
+      - title: whisparr
+        description: xxx
+        icon: hl-whisparr
+        url: http://rip.bmoore.local:6969/
+        target: newtab
+        id: 3_299_whisparr
+      - title: sonarr
+        description: music
+        icon: hl-sonarr
+        url: http://rip.bmoore.local:8989/
+        target: newtab
+        id: 4_299_sonarr
+      - title: lidarr
+        description: tv
+        icon: hl-lidarr
+        url: http://rip.bmoore.local:8686/
+        target: newtab
+        id: 5_299_lidarr
+      - title: radarr
+        description: movies
+        icon: hl-radarr
+        url: http://rip.bmoore.local:7878/
+        target: newtab
+        id: 6_299_radarr
+      - title: readarr
+        description: books
+        icon: hl-readarr
+        url: http://rip.bmoore.local:8787/
+        target: newtab
+        id: 7_299_readarr
+      - title: jackett
+        description: tracker-obtainer
+        icon: hl-jackett
+        url: http://rip.bmoore.local:9117/
+        target: newtab
+        id: 8_299_jackett
+      - title: overseerr
+        description: manager
+        icon: hl-overseerr
+        url: http://rip.bmoore.local:5055/
+        target: newtab
+        id: 9_299_overseerr

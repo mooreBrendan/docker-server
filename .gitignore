@@ -1,8 +1,11 @@
+HomeAssistant/.**
 HomeAssistant/home-assistant*
 HomeAssistant/tts
 pihole/etc-pihole/list*
-pihole/etc-pihole/adminpw.txt`
+pihole/etc-pihole/adminpw.txt
 pihole/etc-pihole/*.db*
+pihole/etc-pihole/*.db
 pihole/etc-pihole/logrotate
 pihole/etc-pihole/migration_backup
 pihole/etc-pihole/dhcp.leases
+pihole/etc-pihole/*.bak
