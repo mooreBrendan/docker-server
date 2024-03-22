@@ -9,3 +9,4 @@ pihole/etc-pihole/logrotate
 pihole/etc-pihole/migration_backup
 pihole/etc-pihole/dhcp.leases
 pihole/etc-pihole/*.bak
+pihole/etc-pihole/versions

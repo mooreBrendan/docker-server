@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   #home assistant
   homeassistant:
@@ -19,14 +19,8 @@ services:
     image: pihole/pihole:latest
     # For DHCP it is recommended to remove these ports and instead add: network_mode: host
     ports:
-      - target: 53
-        published: 53
-        protocol: tcp
-        mode: host
-      - target: 53
-        published: 53
-        protocol: udp
-        mode: host
+      - "53:53/tcp"
+      - "53:53/udp"
       - "67:67/udp"
       - "8070:80/tcp"
       - "8073:443/tcp"
@@ -101,7 +95,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      #start_period: 40s
 
 volumes:
   uptime-kuma:
