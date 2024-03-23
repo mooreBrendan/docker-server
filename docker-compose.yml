@@ -97,6 +97,36 @@ services:
       retries: 3
       #start_period: 40s
 
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=EST
+    volumes:
+      - /var/cache/ntfy:/var/cache/ntfy
+      - ./ntfy:/etc/ntfy
+    ports:
+      - 6060:80
+    healthcheck:
+        test: ["CMD-SHELL", "wget -q --tries=1 http://localhost:6060/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
+        interval: 60s
+        timeout: 10s
+        retries: 3
+    restart: unless-stopped
+
+  proxy:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '81:80'
+      - '82:81'
+      - '444:443'
+    volumes:
+      - ./proxy/data:/data
+      - ./proxy/ssl:/etc/letsencrypt
+
 volumes:
   uptime-kuma:
   portainer_data:
