@@ -1,6 +1,7 @@
 HomeAssistant/.**
 HomeAssistant/home-assistant*
 HomeAssistant/tts
+HomeAssistant/blueprints/**
 pihole/etc-pihole/list*
 pihole/etc-pihole/adminpw.txt
 pihole/etc-pihole/*.db*
@@ -14,3 +15,4 @@ proxy/data/keys.json
 proxy/data/*.sqlite
 proxy/data/logs**
 traefik/certs/**
+traefik/log/**

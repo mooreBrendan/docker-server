@@ -12,6 +12,10 @@ providers:
     directory: /etc/traefik
     watch: true
 
+log:
+  level: DEBUG
+  filepath: /var/log/traefik/traefik.log
+
 accesslog:
   format: common
   filePath: /var/log/traefik/access.log
@@ -37,14 +41,14 @@ certificatesResolvers:
   stage:
     acme:
       email: moore.brendanm@comcast.net
-      storage: /ssl-certs/acme.json
+      storage: /var/traefik/ssl-certs/acme.json
       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       httpChallenge:
         entryPoint: web
   prod:
     acme:
       email: moore.brendanm@comcast.net
-      storage: /ssl-certs/acme.json
+      storage: /var/traefik/ssl-certs/acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       httpChallenge:
         entryPoint: web
