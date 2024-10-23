@@ -89,12 +89,12 @@ sections:
     items:
       - title: Pi-hole
         icon: si-pihole
-        url: http://docker.bmoore.local:8070/admin/index.php
+        url: http://pihole.bmoore.local/admin/index.php
         target: newtab
         id: 0_1255_pihole
       - title: Uptime Kuma
         icon: si-uptimekuma
-        url: http://docker.bmoore.local:8060/
+        url: http://uptime_kuma.bmoore.local/
         target: newtab
         id: 1_1255_uptimekuma
       - title: freeIPA
@@ -108,7 +108,7 @@ sections:
         id: 3_1255_portainer
       - title: Home Assistant
         icon: si-homeassistant
-        url: http://docker.bmoore.local:8123/
+        url: http://ha.bmoore.local/
         target: newtab
         id: 4_1255_homeassistant
       - title: Plex

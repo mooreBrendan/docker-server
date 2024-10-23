@@ -4,26 +4,35 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "homeassistant/home-assistant:stable"
-    ports:
-      - "8123:8123/tcp"
+    # ports:
+    #   - "8123:8123/tcp"
     volumes:
       - ./HomeAssistant:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
+    networks:
+      - traefik_net
     #network_mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ha.rule=Host(`ha.bmoore.local`)"
+      - "traefik.http.routers.ha.entrypoints=web,websecure"
+      - "traefik.http.services.ha.loadbalancer.server.port=8123"
+      - "traefik.http.routers.ha.tls=true"
+      - "traefik.http.routers.ha.tls.certResolver=prod"
 
-    #pihole
+  #pihole
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
     # For DHCP it is recommended to remove these ports and instead add: network_mode: host
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "8070:80/tcp"
-      - "8073:443/tcp"
+    # ports:
+    #   - "53:53/tcp"
+    #   - "53:53/udp"
+    #   - "67:67/udp"
+    #   - "8070:80/tcp"
+    #   - "8073:443/tcp"
     environment:
       TZ: 'America/Indianapolis'
       WEBPASSWORD: #'TEMP_PASSWORD' #'set a secure password here or it will be random'
@@ -38,6 +47,15 @@ services:
       - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)      
     #network_mode: host
     restart: unless-stopped
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.bmoore.local`)"
+      - "traefik.http.routers.pihole.entrypoints=web,websecure"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      - "traefik.http.routers.pihole.tls=true"
+      - "traefik.http.routers.pihole.tls.certResolver=prod"
 
   #UPTIME KUMA
   uptime_kuma:
@@ -45,9 +63,18 @@ services:
     container_name: uptime-kuma
     volumes:
       - uptime-kuma:/app/data
-    ports:
-      - 8060:3001
+    # ports:
+    #   - 8060:3001
     restart: always
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.uptime_kuma.rule=Host(`uptime_kuma.bmoore.local`)"
+      - "traefik.http.routers.uptime_kuma.entrypoints=web,websecure"
+      - "traefik.http.services.uptime_kuma.loadbalancer.server.port=3001"
+      - "traefik.http.routers.uptime_kuma.tls=true"
+      - "traefik.http.routers.uptime_kuma.tls.certResolver=prod"
 
   #Watch Tower
   watch_tower:
@@ -56,6 +83,14 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wt.rule=Host(`wt.bmoore.local`)"
+      - "traefik.http.routers.wt.entrypoints=web,websecure"
+      - "traefik.http.routers.wt.tls=true"
+      - "traefik.http.routers.wt.tls.certResolver=prod"
 
   #Portainer
   portainer:
@@ -68,6 +103,14 @@ services:
     ports:
       - 8000:8000
       - 9443:9443
+    # network_mode: service:traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.bmoore.local`)"
+      - "traefik.http.routers.portainer.entrypoints=web,websecure"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+      - "traefik.http.routers.portainer.tls=true"
+      - "traefik.http.routers.portainer.tls.certResolver=prod"
 
   dashy:
     # To build from source, replace 'image: lissy93/dashy' with 'build: .'
@@ -77,10 +120,10 @@ services:
     # Pass in your config file below, by specifying the path on your host machine    
     volumes:
       - "./dashy/config.yml:/app/user-data/conf.yml"
-    ports:
-      - 443:443
-      - 80:8080
-    # Set any environmental variables
+      # ports:
+      # - 443:443
+      # - 80:8080
+      # Set any environmental variables
     environment:
       - NODE_ENV=production
       # Specify your user ID and group ID. You can find this by running `id -u` and `id -g`    
@@ -88,6 +131,8 @@ services:
       - GID=1000
     # Specify restart policy
     restart: unless-stopped
+    networks:
+      - traefik_net
     # Configure healthchecks
     healthcheck:
       test: [ 'CMD', 'node', '/app/services/healthcheck' ]
@@ -95,6 +140,13 @@ services:
       timeout: 10s
       retries: 3
       #start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashy.rule=Host(`dashy.bmoore.local`)"
+      - "traefik.http.routers.dashy.entrypoints=web,websecure"
+      - "traefik.http.services.dashy.loadbalancer.server.port=8080"
+      - "traefik.http.routers.dashy.tls=true"
+      - "traefik.http.routers.dashy.tls.certResolver=prod"
 
   ntfy:
     image: binwiederhier/ntfy
@@ -106,37 +158,53 @@ services:
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
       - ./ntfy:/etc/ntfy
-    ports:
-      - 6060:80
+    # ports:
+    #   - 6060:80
     healthcheck:
-      test: [ "CMD-SHELL", "wget -q --tries=1 http://localhost:6060/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1" ]
+      test: [ "CMD-SHELL", "wget -q --tries=1 http://127.0.0.1/v1/health -O - | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1" ]
       interval: 60s
       timeout: 10s
       retries: 3
     restart: unless-stopped
-
-  # proxy:
-  #   image: 'jc21/nginx-proxy-manager:latest'
-  #   restart: unless-stopped
-  #   ports:
-  #     - '81:80'
-  #     - '82:81'
-  #     - '444:443'
-  #   volumes:
-  #     - ./proxy/data:/data
-  #     - ./proxy/ssl:/etc/letsencrypt
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ntfy.rule=Host(`ntfy.bmoore.local`)"
+      - "traefik.http.routers.ntfy.entrypoints=web,websecure"
+      - "traefik.http.services.ntfy.loadbalancer.server.port=80"
+      - "traefik.http.routers.ntfy.tls=true"
+      - "traefik.http.routers.ntfy.tls.certResolver=prod"
 
   traefik:
     image: traefik
     container_name: traefik
     restart: unless-stopped
     ports:
-      - '81:80'
+      - '80:80'
       - '8081:8080'
+      - '443:443'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik/certs:/ssl-certs
+    networks:
+      traefik_net:
+        ipv4_address: 172.16.16.16
+    command:
+      - --log.level=INFO
+      - --accesslog=true
 
 volumes:
   uptime-kuma:
   portainer_data:
+
+
+networks:
+  traefik_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.16.0/24
+          gateway: 172.16.16.1

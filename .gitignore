@@ -13,3 +13,4 @@ pihole/etc-pihole/versions
 proxy/data/keys.json
 proxy/data/*.sqlite
 proxy/data/logs**
+traefik/certs/**

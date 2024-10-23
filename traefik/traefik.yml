@@ -1,10 +1,50 @@
 ## traefik.yml
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
 
 # Docker configuration backend
 providers:
   docker:
+    exposedByDefault: true
     defaultRule: "Host(`{{ trimPrefix `/` .Name }}.docker.localhost`)"
+  file:
+    directory: /etc/traefik
+    watch: true
+
+accesslog:
+  format: common
+  filePath: /var/log/traefik/access.log
 
 # API and dashboard configuration
 api:
+  dashboard: true
+  disableDashboardAd: true
   insecure: true
+
+entrypoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  stage:
+    acme:
+      email: moore.brendanm@comcast.net
+      storage: /ssl-certs/acme.json
+      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
+  prod:
+    acme:
+      email: moore.brendanm@comcast.net
+      storage: /ssl-certs/acme.json
+      caServer: "https://acme-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
