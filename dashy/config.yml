@@ -126,6 +126,12 @@ sections:
         url: https://129.153.137.162/admin/
         target: newtab
         id: 7_1255_openvpn
+      - title: traefik
+        description: reverse proxy
+        icon: si-traefikproxy
+        url: https://docker.bmoore.local:8081
+        target: newtab
+        id: 8_1255_traefik
   - name: Coding
     displayData:
       sortBy: default
