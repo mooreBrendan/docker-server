@@ -9,7 +9,13 @@ frontend:
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.16.16.16
+    - 172.16.16.0/24
+    - 192.168.86.0/24
+    - 127.0.0.1
+    - ::1
+    - fe80::/64
+    - fe00::/64
+    - fd00::/64
 
 automation: !include automations.yaml
 script: !include scripts.yaml

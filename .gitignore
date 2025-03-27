@@ -2,6 +2,7 @@ HomeAssistant/.**
 HomeAssistant/home-assistant*
 HomeAssistant/tts
 HomeAssistant/blueprints/**
+HomeAssistant/blueprints/script/homeassistant/*
 pihole/etc-pihole/list*
 pihole/etc-pihole/adminpw.txt
 pihole/etc-pihole/*.db*
@@ -11,6 +12,9 @@ pihole/etc-pihole/migration_backup
 pihole/etc-pihole/dhcp.leases
 pihole/etc-pihole/*.bak
 pihole/etc-pihole/versions
+pihole/etc-pihole/gravity_backups/**
+pihole/etc-pihole/cli_pw
+pihole/etc-pihole/*.crt
 proxy/data/keys.json
 proxy/data/*.sqlite
 proxy/data/logs**

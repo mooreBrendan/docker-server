@@ -21,6 +21,8 @@ services:
       - "traefik.http.services.ha.loadbalancer.server.port=8123"
       - "traefik.http.routers.ha.tls=true"
       - "traefik.http.routers.ha.tls.certResolver=prod"
+    extra_hosts:
+      - host.docker.internal:172.17.0.1
 
   #pihole
   pihole:
