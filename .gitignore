@@ -20,3 +20,6 @@ proxy/data/*.sqlite
 proxy/data/logs**
 traefik/certs/**
 traefik/log/**
+pihole/etc-pihole/pihole.toml
+pihole/etc-pihole/tls.pem
+pihole/etc-pihole/config_backups/pihole.toml.*
