@@ -165,10 +165,12 @@ services:
     command:
       - serve
     environment:
-      - TZ=EST
+      NTFY_BASE_URL: http://ntfy.bmoore.local
+      NTFY_BEHIND_PROXY: "true"
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
-      - ./ntfy:/etc/ntfy
+      - ./ntfy:/var/lib/ntfy
     # ports:
     #   - 6060:80
     healthcheck:
