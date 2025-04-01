@@ -1,8 +1,8 @@
-HomeAssistant/.**
-HomeAssistant/home-assistant*
-HomeAssistant/tts
-HomeAssistant/blueprints/**
-HomeAssistant/blueprints/script/homeassistant/*
+HomeAssistant/config/.**
+HomeAssistant/config/home-assistant*
+HomeAssistant/config/tts
+HomeAssistant/config/blueprints/**
+HomeAssistant/config/blueprints/script/homeassistant/*
 pihole/etc-pihole/list*
 pihole/etc-pihole/adminpw.txt
 pihole/etc-pihole/*.db*
@@ -23,3 +23,4 @@ traefik/log/**
 pihole/etc-pihole/pihole.toml
 pihole/etc-pihole/tls.pem
 pihole/etc-pihole/config_backups/pihole.toml.*
+pihole/etc-pihole/versions
