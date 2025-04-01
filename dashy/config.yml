@@ -107,7 +107,7 @@ sections:
         id: 2_1255_freeipa
       - title: Portainer
         icon: si-portainer
-        url: https://docker.bmoore.local:9443/
+        url: https://portainer.bmoore.local
         target: newtab
         statusCheckAllowInsecure: true
         id: 3_1255_portainer
