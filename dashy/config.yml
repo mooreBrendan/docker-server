@@ -107,7 +107,7 @@ sections:
         id: 2_1255_freeipa
       - title: Portainer
         icon: si-portainer
-        url: https://docker.bmoore.local:9443/
+        url: https://portainer.bmoore.local
         target: newtab
         statusCheckAllowInsecure: true
         id: 3_1255_portainer
@@ -134,7 +134,7 @@ sections:
       - title: traefik
         description: reverse proxy
         icon: si-traefikproxy
-        url: https://docker.bmoore.local:8081
+        url: http://docker.bmoore.local:8081
         target: newtab
         statusCheckAllowInsecure: true
         id: 8_1255_traefik
