@@ -6,11 +6,12 @@ services:
     extends:
       file: ./HomeAssistant/ha-compose.yml
       service: homeassistant
+    # ports:
+    #   - "8123:8123/tcp"
     depends_on:
       - traefik
     networks:
       - traefik_net
-    #network_mode: host
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ha.rule=Host(`ha.bmoore.local`)"
@@ -18,10 +19,10 @@ services:
       - "traefik.http.services.ha.loadbalancer.server.port=8123"
       - "traefik.http.routers.ha.tls=true"
       - "traefik.http.routers.ha.tls.certResolver=prod"
-    extra_hosts:
-      - host.docker.internal:172.17.0.1
+    # extra_hosts:
+    #   - host.docker.internal:172.17.0.1
 
-  #pihole
+    #pihole
   pihole:
     extends:
       file: ./pihole/pihole-compose.yml
