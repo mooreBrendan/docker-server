@@ -5,10 +5,13 @@ services:
       MOTD: "Be Moore"
       EULA: "TRUE"
       MEMORY: "4G"
+      TYPE: "FORGE"
       VERSION: "1.19.2"
+      MODS_FILE: /extras/mods.txt
       # ENABLE_RCON: "true"
       # RCON_PASSWORD: ${RCON_PASSWORD}
       # RCON_PORT: 28016
-      restart: always
+      restart: unless-stopped
     volumes:
     - ./data:/data
+    - ./mods.txt:/extras/mods.txt:ro
