@@ -132,6 +132,13 @@ services:
       - "traefik.http.routers.ntfy.tls=true"
       - "traefik.http.routers.ntfy.tls.certResolver=prod"
 
+  mc:
+    extends:
+      file: ./minecraft/mine-compose.yml
+      service: mc
+    ports:
+      - 25565:25565
+
   traefik:
     image: traefik
     container_name: traefik

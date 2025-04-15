@@ -1,0 +1,13 @@
+services:
+  mc:
+    image: itzg/minecraft-server:java17
+    environment:
+      MOTD: "Be Moore"
+      EULA: "TRUE"
+      MEMORY: "4G"
+      # ENABLE_RCON: "true"
+      # RCON_PASSWORD: ${RCON_PASSWORD}
+      # RCON_PORT: 28016
+      restart: always
+    volumes:
+    - ./data:/data
