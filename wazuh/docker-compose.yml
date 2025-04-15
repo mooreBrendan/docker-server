@@ -1,6 +1,6 @@
 services:
   wazuh_manager:
-    image: wazuh/wazuh-manager
+    image: wazuh/wazuh-manager:4.11.2
     container_name: waz-man
     hostname: waz-man
     ulimits:
@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
 
   wazuh.indexer:
-    image: wazuh/wazuh-indexer:4.8.1
+    image: wazuh/wazuh-indexer:4.11.2
     container_name: wazuh-prod-1-indexer
     hostname: wazuh.indexer
     ports:
@@ -74,7 +74,7 @@ services:
     restart: unless-stopped
 
   wazuh.dashboard:
-    image: wazuh/wazuh-dashboard:4.8.1
+    image: wazuh/wazuh-dashboard:4.11.2
     container_name: wazuh-prod-1-dashboard
     hostname: wazuh.dashboard
     # (Optional) ->
@@ -97,7 +97,7 @@ services:
       - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
       - wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config
       - wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
-    # labels:
+      # labels:
       # - traefik.enable=true
       # - traefik.http.routers.wazuh-prod-1-https.entrypoints=web,websecure
       # - traefik.http.routers.wazuh-prod-1-https.rule=Host(`wazuh.bmoore.local`)
@@ -105,8 +105,8 @@ services:
       # - traefik.http.routers.wazuh-prod-1-https.tls.certresolver=prod
       # - traefik.http.services.wazuh-prod-1-service.loadbalancer.server.port=5601
       # - traefik.http.services.wazuh-prod-1-service.loadbalancer.server.scheme=https
-    # networks:
-    #   - traefik_net
+      # networks:
+      #   - traefik_net
     depends_on:
       - wazuh.indexer
     restart: unless-stopped
@@ -127,5 +127,5 @@ volumes:
   wazuh-dashboard-config:
   wazuh-dashboard-custom:
 
-# networks:
-#   traefik_net:
+    # networks:
+    #   traefik_net:
