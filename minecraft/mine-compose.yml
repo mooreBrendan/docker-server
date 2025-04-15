@@ -1,17 +1,28 @@
 services:
   mc:
+    container_name: mc
     image: itzg/minecraft-server:java17
     environment:
       MOTD: "Be Moore"
       EULA: "TRUE"
       MEMORY: "4G"
       TYPE: "FORGE"
-      VERSION: "1.19.2"
-      MODS_FILE: /extras/mods.txt
+      VERSION: "1.20.1"
+      DIFFICULTY: "normal"
+      WHITELIST_FILE: /extras/whitelist.txt
+      OPS_FILE: /extras/ops.txt
       # ENABLE_RCON: "true"
       # RCON_PASSWORD: ${RCON_PASSWORD}
       # RCON_PORT: 28016
-      restart: unless-stopped
+      GENERATE_STRUCTURES: "true"
+      SNOOPER_ENABLED: "false" #no spying for microsoft
+      SPAWN_PROTECTION: "0"
+      ALLOW_FLIGHT: "TRUE"
+      SERVER_NAME: "WeirdWorld"
+      PREVENT_PROXY_CONNECTIONS: "FALSE"
+    restart: unless-stopped
     volumes:
     - ./data:/data
-    - ./mods.txt:/extras/mods.txt:ro
+    - ./mods:/mods
+    - ./ops.txt:/extras/ops.txt
+    - ./whitelist.txt:/extras/whitelist.txt
