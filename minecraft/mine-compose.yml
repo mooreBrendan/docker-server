@@ -5,6 +5,7 @@ services:
       MOTD: "Be Moore"
       EULA: "TRUE"
       MEMORY: "4G"
+      VERSION: "1.19.2"
       # ENABLE_RCON: "true"
       # RCON_PASSWORD: ${RCON_PASSWORD}
       # RCON_PORT: 28016
