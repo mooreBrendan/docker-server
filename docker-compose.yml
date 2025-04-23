@@ -13,7 +13,7 @@ services:
     #network_mode: host
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ha.rule=Host(`ha.bmoore.local`)"
+      - "traefik.http.routers.ha.rule=Host(`ha.bmoore.tech`)"
       - "traefik.http.routers.ha.entrypoints=web,websecure"
       - "traefik.http.services.ha.loadbalancer.server.port=8123"
       - "traefik.http.routers.ha.tls=true"
@@ -33,14 +33,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=docker_external"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.bmoore.local`)"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.bmoore.tech`)"
       - "traefik.http.routers.pihole.entrypoints=web,websecure"
       - "traefik.http.routers.pihole.tls=true"
       - "traefik.http.routers.pihole.tls.certResolver=prod"
-      - "traefik.http.routers.pihole.tls.domains[0].main=pihole.bmoore.local"
-      - "traefik.http.routers.pihole.tls.domains[0].sans=pihole.bmoore.local"
+      - "traefik.http.routers.pihole.tls.domains[0].main=pihole.bmoore.tech"
+      - "traefik.http.routers.pihole.tls.domains[0].sans=pihole.bmoore.tech"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
-      - "traefik.frontend.rule=HostRegexp:pihole.bmoore.local,{catchall:.*}"
+      - "traefik.frontend.rule=HostRegexp:pihole.bmoore.tech,{catchall:.*}"
       - "traefik.frontend.priority=1"
       - "traefik.backend=pihole"
 
@@ -57,7 +57,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.uptime.rule=Host(`uptime.bmoore.local`)"
+      - "traefik.http.routers.uptime.rule=Host(`uptime.bmoore.tech`)"
       - "traefik.http.routers.uptime.entrypoints=web,websecure"
       - "traefik.http.services.uptime.loadbalancer.server.port=3001"
       - "traefik.http.routers.uptime.tls=true"
@@ -74,7 +74,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wt.rule=Host(`wt.bmoore.local`)"
+      - "traefik.http.routers.wt.rule=Host(`wt.bmoore.tech`)"
       - "traefik.http.routers.wt.entrypoints=web,websecure"
       - "traefik.http.routers.wt.tls=true"
       - "traefik.http.routers.wt.tls.certResolver=prod"
@@ -94,7 +94,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.bmoore.local`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.bmoore.tech`)"
       - "traefik.http.routers.portainer.entrypoints=web,websecure"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
       - "traefik.http.routers.portainer.tls=true"
@@ -110,7 +110,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashy.rule=Host(`dashy.bmoore.local`)"
+      - "traefik.http.routers.dashy.rule=Host(`dashy.bmoore.tech`)"
       - "traefik.http.routers.dashy.entrypoints=web,websecure"
       - "traefik.http.services.dashy.loadbalancer.server.port=8080"
       - "traefik.http.routers.dashy.tls=true"
@@ -126,7 +126,7 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ntfy.rule=Host(`ntfy.bmoore.local`)"
+      - "traefik.http.routers.ntfy.rule=Host(`ntfy.bmoore.tech`)"
       - "traefik.http.routers.ntfy.entrypoints=web,websecure"
       - "traefik.http.services.ntfy.loadbalancer.server.port=80"
       - "traefik.http.routers.ntfy.tls=true"
