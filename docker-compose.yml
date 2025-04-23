@@ -6,22 +6,22 @@ services:
     extends:
       file: ./HomeAssistant/ha-compose.yml
       service: homeassistant
+    # ports:
+    #   - "8123:8123/tcp"
     depends_on:
       - traefik
     networks:
       - traefik_net
-    #network_mode: host
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ha.rule=Host(`ha.bmoore.local`)"
+      - "traefik.http.routers.ha.rule=Host(`ha.bmoore.tech`)"
       - "traefik.http.routers.ha.entrypoints=web,websecure"
       - "traefik.http.services.ha.loadbalancer.server.port=8123"
       - "traefik.http.routers.ha.tls=true"
-      - "traefik.http.routers.ha.tls.certResolver=prod"
+      # - "traefik.http.routers.ha.tls.certResolver=prod"
     extra_hosts:
       - host.docker.internal:172.17.0.1
-
-  #pihole
+    #pihole
   pihole:
     extends:
       file: ./pihole/pihole-compose.yml
@@ -32,15 +32,15 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=docker_external"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.bmoore.local`)"
+      # - "traefik.docker.network=docker_external"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.bmoore.tech`)"
       - "traefik.http.routers.pihole.entrypoints=web,websecure"
       - "traefik.http.routers.pihole.tls=true"
-      - "traefik.http.routers.pihole.tls.certResolver=prod"
-      - "traefik.http.routers.pihole.tls.domains[0].main=pihole.bmoore.local"
-      - "traefik.http.routers.pihole.tls.domains[0].sans=pihole.bmoore.local"
+      # - "traefik.http.routers.pihole.tls.certResolver=prod"
+      # - "traefik.http.routers.pihole.tls.domains[0].main=pihole.bmoore.tech"
+      # - "traefik.http.routers.pihole.tls.domains[0].sans=pihole.bmoore.tech"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
-      - "traefik.frontend.rule=HostRegexp:pihole.bmoore.local,{catchall:.*}"
+      - "traefik.frontend.rule=HostRegexp:pihole.bmoore.tech,{catchall:.*}"
       - "traefik.frontend.priority=1"
       - "traefik.backend=pihole"
 
@@ -57,13 +57,13 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.uptime.rule=Host(`uptime.bmoore.local`)"
+      - "traefik.http.routers.uptime.rule=Host(`uptime.bmoore.tech`)"
       - "traefik.http.routers.uptime.entrypoints=web,websecure"
       - "traefik.http.services.uptime.loadbalancer.server.port=3001"
       - "traefik.http.routers.uptime.tls=true"
-      - "traefik.http.routers.uptime.tls.certResolver=prod"
+      # - "traefik.http.routers.uptime.tls.certResolver=prod"
 
-  #Watch Tower
+      #Watch Tower
   watch_tower:
     image: containrrr/watchtower:latest
     container_name: watchtower
@@ -74,12 +74,12 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.wt.rule=Host(`wt.bmoore.local`)"
+      - "traefik.http.routers.wt.rule=Host(`wt.bmoore.tech`)"
       - "traefik.http.routers.wt.entrypoints=web,websecure"
       - "traefik.http.routers.wt.tls=true"
-      - "traefik.http.routers.wt.tls.certResolver=prod"
+      # - "traefik.http.routers.wt.tls.certResolver=prod"
 
-  #Portainer
+      #Portainer
   portainer:
     image: portainer/portainer-ce:latest
     hostname: portainer
@@ -94,11 +94,11 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.bmoore.local`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.bmoore.tech`)"
       - "traefik.http.routers.portainer.entrypoints=web,websecure"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
       - "traefik.http.routers.portainer.tls=true"
-      - "traefik.http.routers.portainer.tls.certResolver=prod"
+      # - "traefik.http.routers.portainer.tls.certResolver=prod"
 
   dashy:
     extends:
@@ -110,11 +110,11 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.dashy.rule=Host(`dashy.bmoore.local`)"
+      - "traefik.http.routers.dashy.rule=Host(`dashy.bmoore.tech`)"
       - "traefik.http.routers.dashy.entrypoints=web,websecure"
       - "traefik.http.services.dashy.loadbalancer.server.port=8080"
       - "traefik.http.routers.dashy.tls=true"
-      - "traefik.http.routers.dashy.tls.certResolver=prod"
+      # - "traefik.http.routers.dashy.tls.certResolver=prod"
 
   ntfy:
     extends:
@@ -126,11 +126,11 @@ services:
       - traefik_net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.ntfy.rule=Host(`ntfy.bmoore.local`)"
+      - "traefik.http.routers.ntfy.rule=Host(`ntfy.bmoore.tech`)"
       - "traefik.http.routers.ntfy.entrypoints=web,websecure"
       - "traefik.http.services.ntfy.loadbalancer.server.port=80"
       - "traefik.http.routers.ntfy.tls=true"
-      - "traefik.http.routers.ntfy.tls.certResolver=prod"
+      # - "traefik.http.routers.ntfy.tls.certResolver=prod"
 
   traefik:
     image: traefik
@@ -140,12 +140,15 @@ services:
       - '80:80'
       - '8081:8080'
       - '443:443'
+    environment:
+      - CF_API_EMAIL=${CF_API_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
-      - ./traefik/certs:/var/traefik/ssl-certs
+      - ./traefik/certs:/certs
       - ./traefik/log:/var/log/traefik
-      - "./acme.json:/acme.json" #for portainer
+      # - "./traefik/certs/acme.json:/acme.json" #for portainer
     networks:
       traefik_net:
         ipv4_address: 172.16.16.16
@@ -155,6 +158,10 @@ services:
       - --providers.docker=true
       - --providers.docker.network=traefik_net
       - --docker.exposedbydefault=false
+    labels:
+      - "traefik.http.routers.api.tls.domains[0].main=bmoore.tech"
+      - "traefik.http.routers.api.tls.domains[0].sans=*.bmoore.tech"
+      - "traefik.http.routers.api.tls.certResolver=prod"
 
 volumes:
   uptime-kuma:
