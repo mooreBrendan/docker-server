@@ -41,14 +41,16 @@ certificatesResolvers:
   stage:
     acme:
       email: moore.brendanm@comcast.net
-      storage: /var/traefik/ssl-certs/acme.json
+      storage: /certs/acme.json
       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
-      httpChallenge:
-        entryPoint: web
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 10
   prod:
     acme:
       email: moore.brendanm@comcast.net
-      storage: /var/traefik/ssl-certs/acme.json
+      storage: /certs/acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
-      httpChallenge:
-        entryPoint: web
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 10

@@ -25,3 +25,5 @@ pihole/etc-pihole/tls.pem
 pihole/etc-pihole/config_backups/pihole.toml.*
 pihole/etc-pihole/versions
 HomeAssistant/config/secrets.yaml
+.env
+minecraft/data/*

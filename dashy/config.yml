@@ -89,15 +89,14 @@ sections:
     items:
       - title: Pi-hole
         icon: si-pihole
-        url: http://pihole.bmoore.local/admin/index.php
+        url: http://pihole.bmoore.tech/admin/
         target: newtab
-        statusCheckAllowInsecure: true
         id: 0_1255_pihole
       - title: Uptime Kuma
         icon: si-uptimekuma
-        url: http://uptime.bmoore.local/
+        url: http://uptime.bmoore.tech/
         target: newtab
-        statusCheckAllowInsecure: true
+        statusCheckAllowInsecure: false
         id: 1_1255_uptimekuma
       - title: freeIPA
         icon: hl-freeipa
@@ -107,13 +106,13 @@ sections:
         id: 2_1255_freeipa
       - title: Portainer
         icon: si-portainer
-        url: https://portainer.bmoore.local
+        url: https://portainer.bmoore.tech
         target: newtab
-        statusCheckAllowInsecure: true
+        statusCheckAllowInsecure: false
         id: 3_1255_portainer
       - title: Home Assistant
         icon: si-homeassistant
-        url: http://ha.bmoore.local/
+        url: http://ha.bmoore.tech/
         target: newtab
         id: 4_1255_homeassistant
       - title: Plex
@@ -141,9 +140,9 @@ sections:
       - title: notify
         description: notifications
         icon: si-ntfy
-        url: http://ntfy.bmoore.local
+        url: http://ntfy.bmoore.tech
         target: newtab
-        statusCheckAllowInsecure: true
+        statusCheckAllowInsecure: false
         id: 9_1255_notify
   - name: Coding
     displayData:
