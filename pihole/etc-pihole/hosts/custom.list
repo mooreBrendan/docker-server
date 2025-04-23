@@ -17,14 +17,20 @@
 #                       WITHIN /etc/dnsmasq.d/yourname.conf                      #
 #    (make sure misc.etc_dnsmasq_d is set to true in /etc/pihole/pihole.toml)    #
 #                                                                                #
-#                      Last updated: 2025-02-19 00:55:29 EST                     #
-#                               by FTL version v6.0                              #
+#                      Last updated: 2025-04-23 03:46:05 EDT                     #
+#                               by FTL version v6.1                              #
 #                                                                                #
 ##################################################################################
 
 192.168.86.208 portainer.bmoore.local
 192.168.86.208 pihole.bmoore.local
 192.168.86.208 uptime-kuma.bmoore.local
+192.168.86.208 pihole.bmoore.tech
+192.168.86.208 portainer.bmoore.tech
+192.168.86.208 uptime.bmoore.tech
+192.168.86.208 dashy.bmoore.tech
+192.168.86.208 ha.bmoore.tech
+192.168.86.208 ntfy.bmoore.tech
 
 
-# There are 3 entries in this file
+# There are 9 entries in this file
