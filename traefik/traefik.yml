@@ -40,7 +40,7 @@ entrypoints:
 certificatesResolvers:
   stage:
     acme:
-      email: bmoore@bmoore.tech
+      email: moore.brendanm@comcast.net
       storage: /certs/acme.json
       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       dnsChallenge:
@@ -48,7 +48,7 @@ certificatesResolvers:
         delayBeforeCheck: 10
   prod:
     acme:
-      email: bmoore@bmoore.tech
+      email: moore.brendanm@comcast.net
       storage: /certs/acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       dnsChallenge:
