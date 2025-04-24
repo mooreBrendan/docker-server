@@ -21,7 +21,23 @@ services:
       # - "traefik.http.routers.ha.tls.certResolver=prod"
     extra_hosts:
       - host.docker.internal:172.17.0.1
-    #pihole
+
+  obsidian:
+    extends:
+      file: ./obsidian/obsidian-compose.yml
+      service: obsidian
+    depends_on:
+      - traefik
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.obsidian.rule=Host(`obsidian.bmoore.tech`)"
+      - "traefik.http.routers.obsidian.entrypoints=web,websecure"
+      - "traefik.http.services.obsidian.loadbalancer.server.port=8080"
+      - "traefik.http.routers.obsidian.tls=true"
+
+  #pihole
   pihole:
     extends:
       file: ./pihole/pihole-compose.yml
