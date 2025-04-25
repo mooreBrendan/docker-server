@@ -26,8 +26,10 @@ services:
     extends:
       file: ./bitwarden/bit-compose.yaml
       service: bitwarden
+    volumes:
+      - bitwarden:/etc/bitwarden
     depends_on:
-      - db
+      - mariadb
       - traefik
     networks:
       - traefik_net
@@ -37,7 +39,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.bw.rule=Host(`bw.bmoore.tech`)"
       - "traefik.http.routers.bw.entrypoints=web,websecure"
-      - "traefik.http.services.bw.loadbalancer.server.port=80"
+      - "traefik.http.services.bw.loadbalancer.server.port=8080"
       - "traefik.http.routers.bw.tls=true"
 
   mariadb:
@@ -48,6 +50,8 @@ services:
       MARIADB_PASSWORD: ${BW_DB_PASSWORD}
       MARIADB_USER: ${BW_DB_USERNAME}
       MARIADB_DATABASE: ${BW_DB_DATABASE}
+    volumes:
+      - db-data:/var/lib/mysql
     depends_on:
       - traefik
     networks:
@@ -204,6 +208,8 @@ services:
 volumes:
   uptime-kuma:
   portainer_data:
+  db-data:
+  bitwarden:
 
 
 networks:

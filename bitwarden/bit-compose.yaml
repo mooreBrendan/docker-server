@@ -6,19 +6,15 @@ services:
     container_name: bitwarden
     restart: unless-stopped
     ports:
-      - "80:8080"
-    volumes:
-      - bitwarden:/etc/bitwarden
+      - "8080:8080"
 
   db:
     image: mariadb:10
-    container_name: mariadb
+    container_name: db
     environment:
       MARIADB_RANDOM_ROOT_PASSWORD: "true"
     restart: unless-stopped
-    volumes:
-      - data:/var/lib/mysql
 
-volumes:
-  bitwarden:
-  data:
+# volumes:
+#   bitwarden:
+#   db-data:
