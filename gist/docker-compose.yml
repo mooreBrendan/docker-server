@@ -1,0 +1,19 @@
+services:
+  opengist:
+    image: ghcr.io/thomiceli/opengist:1.8
+    container_name: gist
+    restart: unless-stopped
+    # env_file:
+    #   - .env
+    # environment:
+    #   - OG_OIDC_CLIENT_KEY=${OG_OIDC_CLIENT_KEY}
+    #   - OG_OIDC_SECRET=${OG_OIDC_SECRET}
+    #   - OG_OIDC_DISCOVERY_URL=${OG_OIDC_DISCOVERY_URL}
+    ports:
+      - 6157:6157
+    expose:
+      - 6157 # http ui
+      - 2222 # ssh
+    volumes:
+      - ./data:/opengist
+      - ./config.yml:/config.yml

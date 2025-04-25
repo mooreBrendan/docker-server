@@ -27,3 +27,11 @@ pihole/etc-pihole/versions
 HomeAssistant/config/secrets.yaml
 .env
 minecraft/data/*
+gist/data/opengist-secret.key
+gist/data/opengist.db
+gist/data/log/opengist.log
+gist/data/opengist.index/index_meta.json
+gist/data/sessions/session-encrypt.key
+gist/data/ssh/*
+gist/data/opengist.index/*
+gist/data/symlinks/*
