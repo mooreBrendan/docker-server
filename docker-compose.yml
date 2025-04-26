@@ -21,7 +21,28 @@ services:
       # - "traefik.http.routers.ha.tls.certResolver=prod"
     extra_hosts:
       - host.docker.internal:172.17.0.1
-    #pihole
+
+  mariadb:
+    extends:
+      file: ./mariaDB/maria-compose.yml
+      service: db
+    environment:
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    depends_on:
+      - traefik
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maria.rule=Host(`maria.bmoore.tech`)"
+      - "traefik.tcp.routers.maria.rule=HostSNI(`*`)"
+      - "traefik.http.routers.ha.entrypoints=maria"
+      - "traefik.http.services.maria.loadbalancer.server.port=3306"
+
+  #pihole
   pihole:
     extends:
       file: ./pihole/pihole-compose.yml
@@ -166,6 +187,7 @@ services:
 volumes:
   uptime-kuma:
   portainer_data:
+  db-data:
 
 
 networks:
