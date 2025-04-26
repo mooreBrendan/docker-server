@@ -9,7 +9,12 @@ services:
     # ports:
     #   - "8123:8123/tcp"
     depends_on:
-      - traefik
+      - pihole
+    # healthcheck:
+    #   test: curl -k https://localhost:8123 || exit 1
+    #   interval: 1m30s
+    #   timeout: 10s
+    #   retries: 3
     networks:
       - traefik_net
     labels:
@@ -26,8 +31,8 @@ services:
     extends:
       file: ./pihole/pihole-compose.yml
       service: pihole
-    depends_on:
-      - traefik
+    # depends_on:
+    #   - traefik
     networks:
       - traefik_net
     labels:
@@ -51,8 +56,8 @@ services:
     volumes:
       - uptime-kuma:/app/data
     restart: always
-    depends_on:
-      - traefik
+    # depends_on:
+    #   - traefik
     networks:
       - traefik_net
     labels:
@@ -88,8 +93,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-    depends_on:
-      - traefik
+    # depends_on:
+    #   - traefik
+    # healthcheck:
+    #   test: "wget --no-verbose --tries=3 --spider http://localhost:9000/api/system/status || exit 1"
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
     networks:
       - traefik_net
     labels:
@@ -104,8 +114,14 @@ services:
     extends:
       file: ./dashy/dashy-compose.yml
       service: dashy
-    depends_on:
-      - traefik
+    # depends_on:
+    #   - traefik
+    # healthcheck:
+    #   test: [ 'CMD', 'node', '/app/services/healthcheck' ]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    #   start_period: 10s
     networks:
       - traefik_net
     labels:
@@ -120,8 +136,8 @@ services:
     extends:
       file: ./ntfy/ntfy-compose.yml
       service: ntfy
-    depends_on:
-      - traefik
+    # depends_on:
+    #   - traefik
     networks:
       - traefik_net
     labels:
@@ -149,6 +165,19 @@ services:
       - ./traefik/certs:/certs
       - ./traefik/log:/var/log/traefik
       # - "./traefik/certs/acme.json:/acme.json" #for portainer
+    depends_on:
+      dashy:
+        condition: service_healthy
+      pihole:
+        condition: service_healthy
+      homeassistant:
+        condition: service_started
+      ntfy:
+        condition: service_started
+      portainer:
+        condition: service_started
+      uptime_kuma:
+        condition: service_started
     networks:
       traefik_net:
         ipv4_address: 172.16.16.16
