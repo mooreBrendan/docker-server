@@ -27,3 +27,4 @@ pihole/etc-pihole/versions
 HomeAssistant/config/secrets.yaml
 .env
 minecraft/data/*
+obsidian/config/*

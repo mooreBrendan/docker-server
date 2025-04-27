@@ -24,7 +24,7 @@ services:
 
   obsidian:
     extends:
-      file: ./obsidian/obsidian-compose.yml
+      file: ./obsidian/obsidian-compose.yaml
       service: obsidian
     depends_on:
       - traefik
