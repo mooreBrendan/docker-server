@@ -28,3 +28,4 @@ HomeAssistant/config/secrets.yaml
 .env
 minecraft/data/*
 obsidian/config/*
+obsidian/vaults/blog/.obsidian/*
