@@ -56,7 +56,7 @@ services:
     #   - "traefik.enable=true"
     #   - "traefik.http.routers.maria.rule=Host(`maria.bmoore.tech`)"
     #   - "traefik.tcp.routers.maria.rule=HostSNI(`*`)"
-    #   - "traefik.http.routers.ha.entrypoints=maria"
+    #   - "traefik.http.routers.maria.entrypoints=maria"
     #   - "traefik.http.services.maria.loadbalancer.server.port=3306"
 
     #pihole
