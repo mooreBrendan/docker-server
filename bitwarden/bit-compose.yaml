@@ -8,13 +8,6 @@ services:
     ports:
       - "8080:8080"
 
-  db:
-    image: mariadb:10
-    container_name: db
-    environment:
-      MARIADB_RANDOM_ROOT_PASSWORD: "true"
-    restart: unless-stopped
-
 # volumes:
 #   bitwarden:
 #   db-data:
