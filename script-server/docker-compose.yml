@@ -1,0 +1,10 @@
+services:
+  nginx:
+    image: nginx
+    container_name: script-server
+    ports:
+      - 8088:80
+    volumes:
+      - ./scripts:/srv
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    restart: unless-stopped
