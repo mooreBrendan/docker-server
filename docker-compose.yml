@@ -42,22 +42,24 @@ services:
       file: ./mariaDB/maria-compose.yml
       service: db
     environment:
+      MARIADB_DATABASE: ${BW_DB_DATABASE}
       MARIADB_USER: ${DB_USERNAME}
       MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - db-data:/var/lib/mysql
-    depends_on:
-      - traefik
-    networks:
-      - traefik_net
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.maria.rule=Host(`maria.bmoore.tech`)"
-      - "traefik.tcp.routers.maria.rule=HostSNI(`*`)"
-      - "traefik.http.routers.ha.entrypoints=maria"
-      - "traefik.http.services.maria.loadbalancer.server.port=3306"
+      - db_data:/var/lib/mysql
+    # depends_on:
+    #   - traefik
+    # networks:
+    #   - traefik_net
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.maria.rule=Host(`maria.bmoore.tech`)"
+    #   - "traefik.tcp.routers.maria.rule=HostSNI(`*`)"
+    #   - "traefik.http.routers.ha.entrypoints=maria"
+    #   - "traefik.http.services.maria.loadbalancer.server.port=3306"
 
-  #pihole
+    #pihole
   pihole:
     extends:
       file: ./pihole/pihole-compose.yml
@@ -202,7 +204,7 @@ services:
 volumes:
   uptime-kuma:
   portainer_data:
-  db-data:
+  db_data:
 
 
 networks:

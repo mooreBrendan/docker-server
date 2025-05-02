@@ -2,6 +2,6 @@ services:
   db:
     image: mariadb:11
     container_name: mariadb
-    environment:
-      MARIADB_RANDOM_ROOT_PASSWORD: "true"
+    # environment:
+    #   MARIADB_RANDOM_ROOT_PASSWORD: "true"
     restart: unless-stopped
