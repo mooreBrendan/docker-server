@@ -1,3 +1,6 @@
 [submodule "obsidian/vaults/blog"]
 	path = obsidian/vaults/blog
 	url = git@github.com:mooreBrendan/mooreBrendan.github.io.git
+[submodule "script-server/scripts"]
+	path = script-server/scripts
+	url = https://github.com/mooreBrendan/server-scripts.git
