@@ -1,0 +1,3 @@
+[submodule "obsidian/vaults/blog"]
+	path = obsidian/vaults/blog
+	url = git@github.com:mooreBrendan/mooreBrendan.github.io.git

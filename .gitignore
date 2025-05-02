@@ -35,3 +35,5 @@ gist/data/sessions/session-encrypt.key
 gist/data/ssh/*
 gist/data/opengist.index/*
 gist/data/symlinks/*
+obsidian/config/*
+obsidian/vaults/*

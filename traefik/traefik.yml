@@ -36,6 +36,8 @@ entrypoints:
           scheme: https
   websecure:
     address: :443
+  maria:
+    address: :3306
 
 certificatesResolvers:
   stage:

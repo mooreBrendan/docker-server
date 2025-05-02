@@ -21,6 +21,44 @@ services:
       # - "traefik.http.routers.ha.tls.certResolver=prod"
     extra_hosts:
       - host.docker.internal:172.17.0.1
+
+  obsidian:
+    extends:
+      file: ./obsidian/obsidian-compose.yaml
+      service: obsidian
+    depends_on:
+      - traefik
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.obsidian.rule=Host(`obsidian.bmoore.tech`)"
+      - "traefik.http.routers.obsidian.entrypoints=web,websecure"
+      - "traefik.http.services.obsidian.loadbalancer.server.port=8080"
+      - "traefik.http.routers.obsidian.tls=true"
+
+  mariadb:
+    extends:
+      file: ./mariaDB/maria-compose.yml
+      service: db
+    environment:
+      MARIADB_DATABASE: ${BW_DB_DATABASE}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    # depends_on:
+    #   - traefik
+    # networks:
+    #   - traefik_net
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.maria.rule=Host(`maria.bmoore.tech`)"
+    #   - "traefik.tcp.routers.maria.rule=HostSNI(`*`)"
+    #   - "traefik.http.routers.maria.entrypoints=maria"
+    #   - "traefik.http.services.maria.loadbalancer.server.port=3306"
+
     #pihole
   pihole:
     extends:
@@ -166,6 +204,7 @@ services:
 volumes:
   uptime-kuma:
   portainer_data:
+  db_data:
 
 
 networks:

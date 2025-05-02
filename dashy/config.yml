@@ -59,7 +59,7 @@ sections:
         id: 2_746_nas
       - title: GCP
         description: Google Cloud Platform
-        icon: hl-google-cloud-platform
+        icon: si-googlecloud
         url: https://console.cloud.google.com
         target: newtab
         id: 3_746_gcp
@@ -73,6 +73,12 @@ sections:
         url: https://192.168.86.1/
         target: newtab
         id: 5_746_router
+      - title: Cloudflare
+        description: ''
+        icon: si-cloudflare
+        url: https://dash.cloudflare.com/
+        target: newtab
+        id: 6_746_cloudflare
     displayData:
       sortBy: alphabetical
       cols: 1
@@ -144,6 +150,18 @@ sections:
         target: newtab
         statusCheckAllowInsecure: false
         id: 9_1255_notify
+      - title: NUT
+        description: power supply monitoring
+        icon: si-lightning
+        url: http://docker-clear.bmoore.local:8080/device/ups
+        target: newtab
+        id: 10_1255_nut
+      - title: Obsidian
+        description: notes
+        icon: si-obsidian
+        url: https://obsidian.bmoore.tech/
+        target: newtab
+        id: 11_1255_obsidian
   - name: Coding
     displayData:
       sortBy: default
@@ -167,11 +185,11 @@ sections:
         url: https://github.com/mooreBrendan
         target: newtab
         id: 2_596_github
-      - title: Blogger
-        icon: si-blogger
-        url: https://www.blogger.com/
+      - title: Github Pages
+        icon: si-github
+        url: https://github.com/mooreBrendan/mooreBrendan.github.io
         target: newtab
-        id: 3_596_blogger
+        id: 3_596_githubpages
       - title: bmoore.tech
         icon: 🌐
         url: https://bmoore.tech/
