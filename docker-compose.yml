@@ -79,7 +79,22 @@ services:
       - "traefik.http.routers.uptime.tls=true"
       # - "traefik.http.routers.uptime.tls.certResolver=prod"
 
-      #Watch Tower
+  nginx:
+    extends:
+      file: ./script-server/script-compose.yml
+      service: nginx
+    depends_on:
+      - traefik
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.scripts.rule=Host(`scripts.bmoore.tech`)"
+      - "traefik.http.routers.scripts.entrypoints=web,websecure"
+      - "traefik.http.services.scripts.loadbalancer.server.port=80"
+      - "traefik.http.routers.scripts.tls=true"
+
+  #Watch Tower
   watch_tower:
     image: containrrr/watchtower:latest
     container_name: watchtower
