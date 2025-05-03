@@ -5,7 +5,7 @@ services:
     command:
       - serve
     environment:
-      NTFY_BASE_URL: http://ntfy.bmoore.local
+      NTFY_BASE_URL: http://ntfy.bmoore.tech
       NTFY_BEHIND_PROXY: "true"
     volumes:
       - /var/cache/ntfy:/var/cache/ntfy
