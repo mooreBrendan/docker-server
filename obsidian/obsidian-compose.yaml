@@ -5,7 +5,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./vaults:/vaults # The location on the host for your Obsidian Vaults
-      - ./config:/config # The location to store Obsidan configuration and ssh data for obsidian-git
+      # - ./config:/config # The location to store Obsidan configuration and ssh data for obsidian-git
+      - ./obsidian.json:/config/.config/obsidian/obsidian.json # The location to store Obsidan configuration and ssh data for obsidian-git
     environment:
       - PUID=1000
       - PGID=1000
