@@ -1,0 +1,11 @@
+http:
+  routers:
+    nut:
+      rule: "Host(`nut.bmoore.tech`)"
+      service: nut
+
+  services:
+    nut:
+      loadBalancer:
+        servers:
+          - url: "http://docker-clear.bmoore.local:80"
