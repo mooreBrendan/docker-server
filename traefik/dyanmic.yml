@@ -1,8 +1,13 @@
 http:
   routers:
+    #need 1 for http & 1 for https
     nut:
       rule: "Host(`nut.bmoore.tech`)"
       service: nut
+    nut:
+      rule: "Host(`nut.bmoore.tech`)"
+      service: nut
+      tls: {}
 
   services:
     nut:
