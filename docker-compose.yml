@@ -127,7 +127,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     profiles:
-      - base
+      - extras
     depends_on:
       - traefik
     networks:
