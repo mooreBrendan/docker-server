@@ -6,7 +6,10 @@ services:
     extends:
       file: ./HomeAssistant/ha-compose.yml
       service: homeassistant
+    profiles:
+      - [extras]
     depends_on:
+      - [base]
       - traefik
     networks:
       - traefik_net
@@ -24,7 +27,10 @@ services:
     extends:
       file: ./obsidian/obsidian-compose.yaml
       service: obsidian
+    profiles:
+      - [extras]
     depends_on:
+      - [base]
       - traefik
     networks:
       - traefik_net
@@ -42,6 +48,8 @@ services:
       service: pihole
     environment:
       WEBPASSWORD: ${PIHOLE_PASS}
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -63,6 +71,8 @@ services:
     volumes:
       - uptime-kuma:/app/data
     restart: always
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -79,6 +89,8 @@ services:
     extends:
       file: ./script-server/script-compose.yml
       service: nginx
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -97,6 +109,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
+    profiles:
+      - [base]
     networks:
       - traefik_net
     labels:
@@ -114,6 +128,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -130,6 +146,8 @@ services:
     extends:
       file: ./dashy/dashy-compose.yml
       service: dashy
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -146,6 +164,8 @@ services:
     extends:
       file: ./ntfy/ntfy-compose.yml
       service: ntfy
+    profiles:
+      - [base]
     depends_on:
       - traefik
     networks:
@@ -174,6 +194,8 @@ services:
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./traefik/certs:/certs
       - ./traefik/log:/var/log/traefik
+    profiles:
+      - [base]
     networks:
       traefik_net:
         ipv4_address: 172.16.16.16
