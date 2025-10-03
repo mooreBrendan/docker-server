@@ -9,7 +9,6 @@ services:
     profiles:
       - [extras]
     depends_on:
-      - [base]
       - traefik
     networks:
       - traefik_net
@@ -30,7 +29,6 @@ services:
     profiles:
       - [extras]
     depends_on:
-      - [base]
       - traefik
     networks:
       - traefik_net
@@ -49,7 +47,7 @@ services:
     environment:
       WEBPASSWORD: ${PIHOLE_PASS}
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -72,7 +70,7 @@ services:
       - uptime-kuma:/app/data
     restart: always
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -90,7 +88,7 @@ services:
       file: ./script-server/script-compose.yml
       service: nginx
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -110,7 +108,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     profiles:
-      - [base]
+      - base
     networks:
       - traefik_net
     labels:
@@ -129,7 +127,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -147,7 +145,7 @@ services:
       file: ./dashy/dashy-compose.yml
       service: dashy
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -165,7 +163,7 @@ services:
       file: ./ntfy/ntfy-compose.yml
       service: ntfy
     profiles:
-      - [base]
+      - base
     depends_on:
       - traefik
     networks:
@@ -195,7 +193,7 @@ services:
       - ./traefik/certs:/certs
       - ./traefik/log:/var/log/traefik
     profiles:
-      - [base]
+      - base
     networks:
       traefik_net:
         ipv4_address: 172.16.16.16
