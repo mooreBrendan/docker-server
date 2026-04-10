@@ -1,4 +1,3 @@
 notes:
-need file /pihole/etc-pihole/adminpw.txt to store pihole password
-nginx proxy manager default password is admin@example.com:changeme
+need to copy .env.example to .env and fill with the correct values
 
