@@ -56,6 +56,22 @@ services:
       - "traefik.frontend.priority=1"
       - "traefik.backend=pihole"
 
+
+  it-tools:
+    container_name: it-tools
+    image: corentinth/it-tools:latest
+    restart: unless-stopped
+    depends_on:
+      - traefik
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ittools.rule=Host(`ittools.bmoore.tech`)"
+      - "traefik.http.routers.ittools.entrypoints=web,websecure"
+      - "traefik.http.services.ittools.loadbalancer.server.port=80"
+      - "traefik.http.routers.ittools.tls=true"
+
   #UPTIME KUMA
   uptime_kuma:
     image: louislam/uptime-kuma:1
